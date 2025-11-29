@@ -1,0 +1,1 @@
+{"name": "test_order_feed_link[firefox]", "status": "passed", "parameters": [{"name": "browser", "value": "'firefox'"}], "start": 1764451176408, "stop": 1764451194461, "uuid": "0b4af945-66ea-4761-bab1-7c832ffe8aa4", "testCaseId": "ad5b1e185762d19fe5ceaed2a13d6d83", "fullName": "tests.test_main_functionality#test_order_feed_link"}
