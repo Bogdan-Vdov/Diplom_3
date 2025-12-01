@@ -2,7 +2,7 @@
 
 ## Автотесты для UI Stellar Burgers
 
-Этот проект содержит автоматизированные тесты для веб-приложения Stellar Burgers. Используется паттерн Page Object.
+Этот проект содержит только настоящие автоматизированные UI-тесты для веб-приложения Stellar Burgers. Используется паттерн Page Object.
 
 ### Требования
 
@@ -18,43 +18,19 @@ pip install -r requirements.txt
 
 ### Запуск тестов
 
-Для проверки работы Page Object'ов:
-
-```bash
-pytest tests/test_page_objects.py
-```
-
-Для проверки импортов:
-
-```bash
-pytest tests/test_imports.py
-```
-
 Для проверки основной функциональности:
 
 ```bash
-pytest tests/test_functionality.py
+pytest tests/test_main_functionality.py
 ```
 
 Для проверки функциональности ленты заказов:
 
 ```bash
-pytest tests/test_order_feed_functionality.py
+pytest tests/test_order_feed.py
 ```
 
-Для проверки работы с динамическим контентом:
-
-```bash
-pytest tests/test_dynamic_content.py
-```
-
-Для проверки дополнительной функциональности:
-
-```bash
-pytest tests/test_additional_functionality.py
-```
-
-Для запуска тестов в браузерах (требует установленных браузеров):
+Для запуска всех тестов в браузерах (требует установленных браузеров):
 
 ```bash
 pytest

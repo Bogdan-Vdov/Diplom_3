@@ -1,0 +1,1 @@
+{"name": "test_site_loads[firefox]", "status": "skipped", "parameters": [{"name": "browser", "value": "'firefox'"}], "start": 1764593926364, "stop": 1764593926364, "uuid": "18281aaa-b386-4a0e-a125-f944a2f8c0f9", "testCaseId": "7cdca5c05fbca7e94a3fa3005756c16b", "fullName": "tests.test_main_functionality#test_site_loads"}
