@@ -2,8 +2,10 @@ import pytest
 from pages.main_page import MainPage
 from pages.order_feed_page import OrderFeedPage
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
+import allure
 
 # Проверка, что страница ленты заказов загружается
+@allure.step("Проверка загрузки страницы ленты заказов")
 def test_order_feed_page_loads(browser):
     try:
         browser.get("https://stellarburgers.education-services.ru/feed")
@@ -13,6 +15,7 @@ def test_order_feed_page_loads(browser):
         pytest.fail(f"Страница ленты заказов не загрузилась: {e}")
 
 # Увеличение счетчиков после создания заказа
+@allure.step("Проверка увеличения счетчиков после создания заказа")
 def test_counters_increase_after_order(browser):
     try:
         # Открываем страницу ленты заказов и получаем начальные значения счетчиков
@@ -36,6 +39,7 @@ def test_counters_increase_after_order(browser):
         pytest.fail(f"Ошибка при работе со счетчиками: {e}")
 
 # Появление номера заказа в разделе «В работе»
+@allure.step("Проверка появления номера заказа в разделе 'В работе'")
 def test_order_appears_in_work_section(browser):
     try:
         # Открываем страницу ленты заказов
