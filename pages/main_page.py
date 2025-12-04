@@ -8,8 +8,8 @@ class MainPage(BasePage):
     # Элементы главной страницы
     # Выбираем конкретный ингредиент для тестов
     INGREDIENT = (By.XPATH, "//p[text()='Флюоресцентная булка R2-D3']")
-    INGREDIENT_COUNTER = (By.XPATH, "//p[text()='Флюоресцентная булка R2-D3']/following-sibling::p")
-    MODAL_CLOSE_BUTTON = (By.XPATH, "//button[@class='close' or @class='Modal_modal__close__button']")
+    INGREDIENT_COUNTER = (By.XPATH, "//p[text()='Флюоресцентная булка R2-D3']/preceding-sibling::div[contains(@class, 'counter_counter')]/p")
+    MODAL_CLOSE_BUTTON = (By.XPATH, "//button[contains(@class, 'Modal_modal__close')]")
     
     def __init__(self, driver):
         super().__init__(driver)
@@ -48,20 +48,48 @@ class MainPage(BasePage):
             # Если кнопка закрытия не найдена, пробуем закрыть ESC
             try:
                 from selenium.webdriver.common.keys import Keys
-                self.driver.find_element(By.TAG_NAME, "body").send_keys(Keys.ESCAPE)
+                self.find_element((By.TAG_NAME, "body")).send_keys(Keys.ESCAPE)
             except:
                 pass  # Игнорируем ошибки закрытия
+    
+    # Проверить, что модальное окно закрылось
+    @allure.step("Проверка, что модальное окно закрылось")
+    def is_modal_closed(self):
+        try:
+            element = self.find_element(self.MODAL_CLOSE_BUTTON)
+            # Если элемент найден, проверяем, что он не отображается
+            if element.is_displayed():
+                # Иногда элемент может оставаться в DOM, но быть невидимым
+                # Проверим по позиции элемента
+                location = element.location
+                size = element.size
+                # Если элемент вне видимой области, считаем его скрытым
+                if location['x'] < 0 or location['y'] < 0 or size['width'] == 0 or size['height'] == 0:
+                    return True  # Элемент скрыт
+                else:
+                    # Попробуем подождать немного, может быть анимация закрытия
+                    # Ждем, пока элемент станет невидимым
+                    try:
+                        from selenium.webdriver.support.ui import WebDriverWait
+                        from selenium.webdriver.support import expected_conditions as EC
+                        WebDriverWait(self.driver, 1).until(EC.invisibility_of_element(element))
+                    except:
+                        # Если не удалось дождаться, проверим еще раз
+                        pass
+                    # Проверим еще раз
+                    return not element.is_displayed()
+            else:
+                return True  # Элемент найден, но не отображается
+        except NoSuchElementException:
+            # Элемент не найден - это нормально, модальное окно закрылось
+            return True
         
     # Получить счетчик ингредиента
     @allure.step("Получение значения счетчика ингредиента")
     def get_ingredient_counter(self):
+        counter_text = self.get_text(self.INGREDIENT_COUNTER)
+        # Пытаемся преобразовать в число, если это возможно
         try:
-            counter_text = self.get_text(self.INGREDIENT_COUNTER)
-            # Пытаемся преобразовать в число, если это возможно
-            try:
-                return int(counter_text)
-            except ValueError:
-                return counter_text
-        except (TimeoutException, NoSuchElementException) as e:
-            # Возвращаем значение по умолчанию
-            return 0
+            return int(counter_text)
+        except ValueError:
+            return counter_text

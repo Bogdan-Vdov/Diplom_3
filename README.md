@@ -30,6 +30,18 @@ pytest tests/test_main_functionality.py
 pytest tests/test_order_feed.py
 ```
 
+Для проверки авторизации:
+
+```bash
+pytest tests/test_auth.py
+```
+
+Для проверки функциональности заказов:
+
+```bash
+pytest tests/test_orders.py
+```
+
 Для запуска всех тестов в браузерах (требует установленных браузеров):
 
 ```bash
@@ -61,6 +73,10 @@ allure serve allure-results
 - `pages/` - Page Object'ы
   - `components/` - Компоненты
 - `tests/` - Тесты
+  - `test_main_functionality.py` - Основная функциональность
+  - `test_order_feed.py` - Лента заказов
+  - `test_auth.py` - Авторизация
+  - `test_orders.py` - Заказы
 - `requirements.txt` - Зависимости
 - `pytest.ini` - Конфигурация
 - `run_tests.py` - Скрипт для запуска тестов

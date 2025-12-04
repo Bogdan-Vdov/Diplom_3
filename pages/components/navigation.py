@@ -9,7 +9,7 @@ class NavigationComponent(BasePage):
     """
     # Элементы навигации
     CONSTRUCTOR_LINK = (By.XPATH, "//p[text()='Конструктор']")
-    ORDER_FEED_LINK = (By.XPATH, "//p[text()='Лента заказов']")
+    ORDER_FEED_LINK = (By.XPATH, "//p[text()='Лента Заказов']")
     
     # Клик по конструктору
     @allure.step("Клик по ссылке 'Конструктор' в навигации")
@@ -17,6 +17,6 @@ class NavigationComponent(BasePage):
         self.click_element(self.CONSTRUCTOR_LINK)
         
     # Клик по ленте заказов
-    @allure.step("Клик по ссылке 'Лента заказов' в навигации")
+    @allure.step("Клик по ссылке 'Лента Заказов' в навигации")
     def click_order_feed(self):
         self.click_element(self.ORDER_FEED_LINK)

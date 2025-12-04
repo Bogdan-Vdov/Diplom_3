@@ -41,3 +41,9 @@ class BasePage:
         self.wait_for_page_load()
         element = self.find_element(locator)
         return element.text
+        
+    # Найти несколько элементов
+    @allure.step("Поиск нескольких элементов {locator}")
+    def find_elements(self, locator):
+        self.wait_for_page_load()
+        return self.driver.find_elements(*locator)
