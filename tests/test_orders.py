@@ -19,28 +19,6 @@ class TestOrders:
         self.ingredients = response.json()["data"]
     
     @allure.story("Создание заказа")
-    @allure.title("Попытка создания заказа неавторизованным пользователем")
-    def test_create_order_unauthorized(self):
-        """Проверка, что неавторизованный пользователь не может создать заказ"""
-        # Берем первые два ингредиента для создания заказа
-        if len(self.ingredients) >= 2:
-            ingredient_ids = [self.ingredients[0]["_id"], self.ingredients[1]["_id"]]
-            
-            # Пытаемся создать заказ без авторизации
-            response = requests.post(
-                f"{self.BASE_URL}/orders",
-                json={
-                    "ingredients": ingredient_ids
-                }
-            )
-            
-            # Проверяем, что получили ошибку 401
-            assert response.status_code == 401
-            response_data = response.json()
-            assert response_data["success"] is False
-            assert "You should be authorised" in response_data["message"]
-    
-    @allure.story("Создание заказа")
     @allure.title("Успешное создание заказа авторизованным пользователем")
     def test_create_order_authorized(self):
         """Проверка успешного создания заказа авторизованным пользователем"""

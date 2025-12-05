@@ -6,6 +6,8 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.firefox.service import Service as FirefoxService
 import os
 
+
+
 # Фикстура для запуска тестов в Chrome и Firefox
 @pytest.fixture(params=["chrome", "firefox"])
 def browser(request):
@@ -14,9 +16,7 @@ def browser(request):
     
     try:
         if browser_name == "chrome":
-            # Запуск Chrome
-            service = ChromeService(ChromeDriverManager().install())
-            driver = webdriver.Chrome(service=service)
+            driver = webdriver.Chrome()
         elif browser_name == "firefox":
             # Запуск Firefox
             service = FirefoxService(GeckoDriverManager().install())
