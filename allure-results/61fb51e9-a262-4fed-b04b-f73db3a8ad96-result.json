@@ -1,0 +1,1 @@
+{"name": "test_site_loads[firefox]", "status": "passed", "parameters": [{"name": "browser", "value": "'firefox'"}], "start": 1764440002178, "stop": 1764440030261, "uuid": "5946c32a-b2ec-4e4a-ba4e-c48bb8829881", "testCaseId": "7cdca5c05fbca7e94a3fa3005756c16b", "fullName": "tests.test_main_functionality#test_site_loads"}
